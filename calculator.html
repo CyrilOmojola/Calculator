@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="calculator.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"rel="stylesheet"/>
+</head>
+<body>
+    <div class="body">
+        <div class="first">
+            <div class="icon"><img src="logo.png" width="40px"></div>
+            <p>Calculator</p>
+            <div class="icons">
+                <button class="tw"><i class="ri-subtract-fill"></i></button>
+                <button class="tw"><i class="ri-checkbox-blank-line"></i></button>
+                <button class="th"><a href="null"><i class="ri-close-line"></i></a></button>
+            </div>
+        </div>
+        <div class="second">
+            <div class="second-i">
+                <i class="ri-menu-line"></i>
+                <p>Standard</p>
+                <i class="ri-edit-box-line"></i>
+                <i class="ri-history-line"></i>
+            </div>
+        </div>
+        <div class="input1"><input id="inp1" type="text"></div>
+        <input type="text" id="inp2" placeholder="0">
+        <div class="function">
+            <button id="btn">MC</button>
+            <button id="btn">MR</button>
+            <button id="btn">M+</button>
+            <button id="btn">M-</button>
+            <button id="btn">MS</button>
+            <button id="btn-i">M<i class="ri-arrow-down-s-line"></i></button>
+        </div>
+        <div class="last">
+            <button id="one">%</button>
+            <button onclick="cancel()" id="one">CE</button>
+            <button onclick="cancel()" id="one">C</button>
+            <button id="one" onclick="del()">DEL</button>
+            <button id="one">1/x</button>
+            <button id="one">x^2</button>
+            <button id="one">2*</button>
+            <button onclick="opera('/')" id="one">/</button>
+            <button onclick="zero(7)" id="one-ll">7</button>
+            <button onclick="zero(8)" id="one-ll">8</button>
+            <button onclick="zero(9)" id="one-ll">9</button>
+            <button onclick="opera('*')" id="one">*</button>
+            <button onclick="zero(4)" id="one-ll">4</button>
+            <button onclick="zero(5)" id="one-ll">5</button>
+            <button onclick="zero(6)" id="one-ll">6</button>
+            <button onclick="opera('-')" id="one">-</button>            
+            <button onclick="zero(1)" id="one-ll">1</button>
+            <button onclick="zero(2)" id="one-ll">2</button>
+            <button onclick="zero(3)" id="one-ll">3</button>
+            <button onclick="opera('+')" id="one">+</button>
+            <button id="one-ll">+/-</button>
+            <button onclick="zero(0)" id="one-ll">0</button>
+            <button onclick="zero('.')" id="one-ll"><b>.</b></button>
+            <button onclick="equals('=')" id="one-l">=</button>
+        </div>
+        <!-- <div class="cal">
+            <button></button>
+        </div> -->
+    </div>
+    <script>
+        let numb=document.getElementById('inp2')
+        let numbers=document.getElementById('inp1')
+        let shouldClear = false
+        let first_value,operate=''
+        let show=''
+        function zero(doc){
+            if (shouldClear==true){
+                numb.value=''
+                shouldClear=false
+            }
+            numb.value+=(doc)
+        }
+        
+        function opera(operators){
+            if (show){
+                equals()
+            }
+            numbers.value = numb.value + operators;
+            shouldClear=true
+            operate=operators
+            first_value=numb.value
+            show=numbers.value
+        }
+
+        function equals(equal){
+            numbers.value += numb.value
+            numbers.value = numbers.value + equal
+            if (operate=='+'){
+                numb.value=Number(first_value)+Number(numb.value)
+            }
+            if (operate=='-'){
+                numb.value=first_value-numb.value
+            }
+            if (operate=='/'){
+                numb.value=first_value/numb.value
+            }
+            if (operate=='*'){
+                numb.value=first_value*numb.value
+            }
+        }
+    
+
+
+        function cancel(){
+            document.getElementById('inp2').value="";
+            document.getElementById('inp1').value="";
+            operate = ''
+        }
+        
+        function del(){
+            numb.value = numb.value.slice(0,-1)
+        }
+    </script>
+</body>
+</html>
